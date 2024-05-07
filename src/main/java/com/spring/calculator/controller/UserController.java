@@ -34,9 +34,9 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String formLogin(Model model) {
         model.addAttribute("user", new User());
-        return "login";
+        return "calculator";
     }
 
     @GetMapping("/register")
@@ -57,14 +57,6 @@ public class UserController {
 
         securityService.autoLogin(user.getUsername(), user.getPassword());
 
-        return "redirect:/login?registrationSuccess";
-    }
-
-    @GetMapping("/login")
-    public String showLoginForm(Model model, String error, String logout, String registrationSuccess) {
-        if (error != null) {
-            model.addAttribute("error", "Username or password is incorrect.");
-        }
-        return "redirect:/calculator";
+        return "redirect:/login";
     }
 }

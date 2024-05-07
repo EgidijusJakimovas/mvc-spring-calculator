@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number update</title>
+    <style>
+        form { margin-left: 20px; }
+    </style>
+</head>
+<body>
+<form name="number" action="/refreshNumber" method="post">
+    <input type="hidden" name="id" value="${number.id}"><br>
+    First number:<br>
+    <input type="number" name="number1" value="${number.number1}"><br>
+    Operation:<br>
+    <input type="text" name="operation" value="${number.operation}"><br>
+    Second number:<br>
+    <input type="number" name="number2" value="${number.number2}"><br>
+    Result:<br>
+    <input type="number" name="result" value="${number.result}"><br>
+    <br>
+    <input type="submit" value="Update">
+</form>
+</body>
+</html>

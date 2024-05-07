@@ -1,4 +1,4 @@
-package com.spring.calculator.configuration;
+package com.spring.calculator.validator;
 
 import org.springframework.security.core.GrantedAuthority;
 

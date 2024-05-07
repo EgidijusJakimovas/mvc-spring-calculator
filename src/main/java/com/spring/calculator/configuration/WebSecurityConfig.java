@@ -40,8 +40,8 @@ public class WebSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                         auth -> auth.anyRequest().authenticated())
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
-                .logout(LogoutConfigurer::permitAll)
+                .formLogin(login -> login.permitAll())
+                .logout(logout -> logout.permitAll())
         ;
 
         return http.build();

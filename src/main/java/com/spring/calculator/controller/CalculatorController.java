@@ -84,6 +84,6 @@ public class CalculatorController {
     @PostMapping("/refreshNumber")
     public String updateNumber(@ModelAttribute("number") Number number) {
         numberService.update(number);
-        return "redirect:/view?id=" + number.getId();
+        return "redirect:/refreshNumber?id=" + number.getId();
     }
 }

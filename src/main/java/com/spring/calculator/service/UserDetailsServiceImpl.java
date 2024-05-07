@@ -1,6 +1,6 @@
 package com.spring.calculator.service;
 
-import com.spring.calculator.configuration.SimpleGrantedAuthority;
+import com.spring.calculator.validator.SimpleGrantedAuthority;
 import com.spring.calculator.model.User;
 import com.spring.calculator.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
