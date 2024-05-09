@@ -3,72 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            width: 300px;
-            margin: 100px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .container h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .error-message {
-            color: red;
-            margin-bottom: 10px;
-        }
-
-        .success-message {
-            color: green;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        button[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-        }
-
-        button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-
-        .register-link {
-            margin-top: 10px;
-        }
-
-        .register-link a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 16px;
-        }
-    </style>
+    <div th:replace="fragments :: header"></div>
 </head>
 <body>
 <div class="container">
@@ -88,7 +23,7 @@
         </div>
         <button type="submit">Log in</button>
     </form>
-    <div class="register-link">
+    <div class="link">
         <a href="/register">Register</a>
     </div>
 </div>
