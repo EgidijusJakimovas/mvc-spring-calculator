@@ -4,10 +4,13 @@ import com.spring.calculator.model.User;
 import com.spring.calculator.service.SecurityService;
 import com.spring.calculator.service.UserService;
 import com.spring.calculator.validator.UserValidator;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +29,9 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
@@ -33,10 +39,32 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String formLogin(Model model) {
+    @GetMapping("/login")
+    public String login(Model model) {
         model.addAttribute("user", new User());
-        return "calculator";
+        return "login";
+    }
+
+    @PostMapping("/loginUser")
+    public String loginUser(@ModelAttribute("user") User loginUser, BindingResult result, HttpSession session) {
+
+        userValidator.validate(loginUser, result);
+
+        if (result.hasErrors()) {
+            return "login";
+        }
+
+        User userFromDB = userService.findByUsername(loginUser.getUsername());
+
+        logger.info("Entered Username: {}", loginUser.getUsername());
+        logger.info("Entered Password (Hashed): {}", bCryptPasswordEncoder.encode(loginUser.getPassword()));
+
+        if (bCryptPasswordEncoder.matches(loginUser.getPassword(), userFromDB.getPassword())) {
+            session.setAttribute("username", userFromDB.getUsername());
+            return "redirect:/calculator";
+        } else {
+            return "redirect:/login";
+        }
     }
 
     @GetMapping("/register")
@@ -46,17 +74,37 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerNewUser(@ModelAttribute("user") User user, BindingResult result) {
+    public String registerNewUser(@ModelAttribute("user") User user, BindingResult result, Model model) {
         userValidator.validate(user, result);
 
         if (result.hasErrors()) {
             return "register";
         }
 
+        User existingUser = userService.findByUsername(user.getUsername());
+        if (existingUser != null) {
+            model.addAttribute("usernameError", "Username is already taken.");
+            return "register";
+        }
+
+        existingUser = userService.getUserByEmail(user.getEmail());
+        if (existingUser != null) {
+            model.addAttribute("emailError", "Email is already registered.");
+            return "register";
+        }
+
         userService.save(user);
 
-        securityService.autoLogin(user.getUsername(), user.getPassword());
+        return "redirect:/login";
+    }
 
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
         return "redirect:/login";
     }
 }
