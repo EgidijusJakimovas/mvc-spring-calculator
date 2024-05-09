@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <div th:include="fragments :: style"></div>
 </head>
 <body>
@@ -35,8 +34,10 @@
         <div id="passwordError" class="error-message"></div>
         <button type="submit">Register</button>
     </form>
-    <div class="link">
-        <a href="/login">Back to Login</a>
+    <div class="button-like-link">
+        <form action="/login" method="get">
+            <button type="submit">Back to Login</button>
+        </form>
     </div>
 </div>
 <script>
