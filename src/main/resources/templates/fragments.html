@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <div th:fragment="style">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Fragments</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
         body {
@@ -19,6 +19,30 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tableContainer {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tableContainer form button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .tableContainer form button[type="submit"]:hover {
+            background-color: #0056b3;
         }
 
         .container h2 {
@@ -110,7 +134,20 @@
             cursor: pointer;
         }
 
-        .btn:hover {
+        .btn2 {
+            width: 10%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            margin-left: 700px;
+        }
+
+        .btn2:hover {
             background-color: #0056b3;
             color: #fff;
         }
@@ -135,6 +172,26 @@
             font-family: Arial, sans-serif;
             font-size: 16px;
             text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e2e6ea;
         }
 
     </style>

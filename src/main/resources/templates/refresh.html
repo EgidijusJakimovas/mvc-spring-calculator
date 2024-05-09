@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Number update</title>
-    <style>
-        form { margin-left: 20px; }
-    </style>
+    <title>Number</title>
+    <div th:replace="fragments :: style"></div>
 </head>
 <body>
-<form name="number" action="/refreshNumber" method="post">
-    <input type="hidden" name="id" value="${number.id}"><br>
-    First number:<br>
-    <input type="number" name="number1" value="${number.number1}"><br>
-    Operation:<br>
-    <input type="text" name="operation" value="${number.operation}"><br>
-    Second number:<br>
-    <input type="number" name="number2" value="${number.number2}"><br>
-    Result:<br>
-    <input type="number" name="result" value="${number.result}"><br>
-    <br>
-    <input type="submit" value="Update">
-</form>
+<div class="container">
+    <form name="number" th:action="@{/refreshNumber}" method="post">
+        <input type="hidden" name="id" th:value="${number.id}">
+        <div class="input-field">
+            <label for="number1">First number:</label>
+            <input type="number" id="number1" name="number1" th:value="${number.number1}" required>
+        </div>
+        <div class="input-field">
+            <label for="operation">Operation:</label>
+            <input type="text" id="operation" name="operation" th:value="${number.operation}"
+                   style="text-align: center;" required>
+        </div>
+        <div class="input-field">
+            <label for="number2">Second number:</label>
+            <input type="number" id="number2" name="number2" th:value="${number.number2}" required>
+        </div>
+        <div class="input-field">
+            <label for="result">Result:</label>
+            <input type="number" id="result" name="result" th:value="${number.result}" required>
+        </div>
+        <button class="btn" type="submit">Update</button>
+    </form>
+    <form action="/numbers" method="get">
+        <button class="btn" type="submit">Back to Numbers</button>
+    </form>
+</div>
 </body>
 </html>

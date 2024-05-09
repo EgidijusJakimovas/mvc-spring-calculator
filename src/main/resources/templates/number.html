@@ -1,50 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Number</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #343a40;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
-        }
-        tr:hover {
-            background-color: #e2e6ea;
-        }
-        .button {
-            display: inline-block;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 20px;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <div th:replace="fragments :: style"></div>
 </head>
 <body>
 <div class="container">
@@ -53,28 +12,30 @@
         <table class="table table-striped">
             <tr>
                 <td><b>Id:</b></td>
-                <td>${number.id}</td>
+                <td th:text="${number.id}"></td>
             </tr>
             <tr>
                 <td><b>First number:</b></td>
-                <td>${number.number1}</td>
+                <td th:text="${number.number1}"></td>
             </tr>
             <tr>
                 <td><b>Operation:</b></td>
-                <td>${number.operation}</td>
+                <td th:text="${number.operation}"></td>
             </tr>
             <tr>
                 <td><b>Second number:</b></td>
-                <td>${number.number2}</td>
+                <td th:text="${number.number2}"></td>
             </tr>
             <tr>
                 <td><b>Result:</b></td>
-                <td>${number.result}</td>
+                <td th:text="${number.result}"></td>
             </tr>
         </table>
     </div>
     <br>
-    <a href="/numbers" class="button">Back</a>
+    <form action="/numbers" method="get">
+        <button type="submit">Back</button>
+    </form>
 </div>
 </body>
 </html>
