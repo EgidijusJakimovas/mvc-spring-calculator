@@ -3,62 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            width: 300px;
-            margin: 100px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .container h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .input-field {
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .input-field label {
-            display: block;
-            font-weight: bold;
-        }
-
-        .input-field input[type="number"],
-        .input-field select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-
-    </style>
+    <div th:replace="fragments :: header"></div>
 </head>
 <body>
 <div class="container">
