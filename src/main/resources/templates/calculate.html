@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculate</title>
-    <div th:replace="fragments :: header"></div>
+    <div th:replace="fragments :: style"></div>
 </head>
 <body>
-<h2 th:text="${number1} + ' ' + ${operation} + ' ' + ${number2} + ' = ' + ${result}"></h2>
+<div class="container">
+    <h2 th:text="${number1} + ' ' + ${operation} + ' ' + ${number2} + ' = ' + ${result}"></h2>
+    <form th:action="@{/calculator}" method="get">
+        <button type="submit">Back to Calculator</button>
+    </form>
+</div>
 </body>
 </html>
