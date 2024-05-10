@@ -18,3 +18,8 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/refresh").setViewName("refresh");
     }
 }
+
+// TODO: Validacija registruojant nauja vartojoja paziet email ir username ar nera db,
+//  parodyti prisijungisi varda ir role,
+//  validacij neigiamiem skaiciam,
+//  valdijacija operacijai vesti tik simboli (kaip updeitini)
