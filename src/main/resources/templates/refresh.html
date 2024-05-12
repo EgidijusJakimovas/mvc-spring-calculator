@@ -16,7 +16,7 @@
         <div class="input-field">
             <label for="operation">Operation:</label>
             <input type="text" id="operation" name="operation" th:value="${number.operation}"
-                   style="text-align: center;" required>
+                   style="text-align: center;" required oninput="validateOperation(event)">
         </div>
         <div class="input-field">
             <label for="number2">Second number:</label>
@@ -32,5 +32,16 @@
         <button class="btn" type="submit">Back to Numbers</button>
     </form>
 </div>
+<script>
+    function validateOperation(event) {
+        var input = event.target;
+        var operationValue = input.value.trim();
+        if (operationValue.length !== 1 || !'+-*/'.includes(operationValue)) {
+            input.setCustomValidity('Please enter only one of the following characters: +, -, *, /');
+        } else {
+            input.setCustomValidity('');
+        }
+    }
+</script>
 </body>
 </html>
