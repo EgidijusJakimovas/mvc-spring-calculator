@@ -39,7 +39,13 @@
     </form>
     <nav>
         <div>
-            <div th:text="${#authentication.principal.username}"></div>
+            <div>
+                <p th:each="authority : ${#authentication.principal.authorities}">
+                    <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
+                    <span th:if="${authority.authority == 'USER'}">user</span>
+                    <span th:if="${authority.authority == 'ADMIN'}">admin</span>
+                </p>
+            </div>
         </div>
     </nav>
 </div>
