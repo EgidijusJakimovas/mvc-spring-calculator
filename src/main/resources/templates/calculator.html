@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
@@ -37,17 +36,13 @@
     <form th:action="@{/logout}" method="post">
         <button class="btn" type="submit">Sign out</button>
     </form>
-    <nav>
-        <div>
-            <div>
-                <p th:each="authority : ${#authentication.principal.authorities}">
-                    <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
-                    <span th:if="${authority.authority == 'USER'}">user</span>
-                    <span th:if="${authority.authority == 'ADMIN'}">admin</span>
-                </p>
-            </div>
-        </div>
-    </nav>
+    <div class="user-info">
+        <p th:each="authority : ${#authentication.principal.authorities}">
+            <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
+            <span th:if="${authority.authority == 'USER'}">USER</span>
+            <span th:if="${authority.authority == 'ADMIN'}">USER</span>
+        </p>
+    </div>
 </div>
 </body>
 </html>
