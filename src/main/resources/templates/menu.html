@@ -18,7 +18,8 @@
             <form id="logoutForm" method="POST" th:action="@{/logout}">
                 <input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             </form>
-            <a href="#" onclick="document.forms['logoutForm'].submit()">Logout, <span th:text="${#httpServletRequest.userPrincipal.name}"></span></a>
+            <a href="#" onclick="document.forms['logoutForm'].submit()">Logout, <span
+                    th:text="${#httpServletRequest.userPrincipal.name}"></span></a>
         </ul>
     </div>
 </nav>
