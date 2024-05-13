@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface NumberRepository extends JpaRepository<Number, Integer> {
 
     @Query("select n from Number n where n.id = :id")
+
     Number findById(int id);
 }

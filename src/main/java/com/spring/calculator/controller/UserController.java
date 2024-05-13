@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class UserController {
 
@@ -81,10 +83,11 @@ public class UserController {
             return "register";
         }
 
-        userService.save(user);
+        userService.saveUser(user);
 
         return "redirect:/login";
     }
+
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
@@ -93,5 +96,12 @@ public class UserController {
             session.invalidate();
         }
         return "redirect:/login";
+    }
+
+    @GetMapping("/users")
+    public String listRegisteredUsers(Model model) {
+        List<User> users = userService.findAllUsers();
+        model.addAttribute("users", users);
+        return "users";
     }
 }

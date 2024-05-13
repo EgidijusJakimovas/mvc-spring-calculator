@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -17,8 +20,7 @@ public class UserServiceImpl implements UserService {
     @Qualifier("BCryptPasswordEncoder")
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Override
-    public void save(User user) {
+    public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRole(User.UserRole.USER);
 
@@ -33,5 +35,32 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public boolean isEmailAlreadyTaken(String email) {
+        User user = userRepository.findByEmail(email);
+        return user != null;
+    }
+
+    @Override
+    public boolean isUsernameAlreadyTaken(String username) {
+        User user = userRepository.findByUsername(username);
+        return user != null;
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        List<User> users = (List<User>) userRepository.findAll();
+        return users.stream().map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    private User convertEntityToDto(User user){
+        User userDto = new User();
+        String[] name = user.getUsername().split(" ");
+        userDto.setUsername(name[0]);
+        userDto.setEmail(user.getEmail());
+        return userDto;
     }
 }

@@ -36,6 +36,12 @@
     <form th:action="@{/logout}" method="post">
         <button class="btn" type="submit">Sign out</button>
     </form>
+    <div th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
+        <form th:action="@{/users}" method="get">
+            <button class="btn" type="submit">Registered Users</button>
+        </form>
+    </div>
+    </div>
     <div class="user-info">
         <p th:each="authority : ${#authentication.principal.authorities}">
             <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
