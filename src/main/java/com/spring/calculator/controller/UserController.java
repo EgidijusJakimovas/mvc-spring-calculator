@@ -6,6 +6,7 @@ import com.spring.calculator.service.UserService;
 import com.spring.calculator.validator.UserValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,17 +74,20 @@ public class UserController {
         return "register";
     }
 
-    @PostMapping("/register")
-    public String registerNewUser(@ModelAttribute("user") User user, BindingResult result) {
-        userValidator.validate(user, result);
-
+    @PostMapping("/register/save")
+    public String registration(@Valid @ModelAttribute("user") User user,
+                               BindingResult result,
+                               Model model){
+        User existing = userService.findUserByEmail(user.getEmail());
+        if (existing != null) {
+            result.rejectValue("email", null, "There is already an account registered with that email");
+        }
         if (result.hasErrors()) {
+            model.addAttribute("user", user);
             return "register";
         }
-
         userService.save(user);
-
-        return "redirect:/login";
+        return "redirect:/register?success";
     }
 
     @GetMapping("/logout")

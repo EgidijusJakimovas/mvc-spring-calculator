@@ -8,5 +8,5 @@ public interface UserService {
 
     User findByUsername(String username);
 
-    User getUserByEmail (String email);
+    User findUserByEmail(String email);
 }
