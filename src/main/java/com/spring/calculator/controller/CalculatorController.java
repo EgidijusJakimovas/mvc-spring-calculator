@@ -5,6 +5,8 @@ import com.spring.calculator.service.NumberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -70,20 +72,39 @@ public class CalculatorController {
 
     @GetMapping("/delete{id}")
     public String delete(@RequestParam("id") int id, Model model) {
-        numberService.delete(id);
         model.addAttribute("numbers", numberService.getAll());
-        return "numbers";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(role -> role.getAuthority().equals("ADMIN"));
+
+        if (!isAdmin) {
+            return "403";
+        }
+
+        numberService.delete(id);
+
+        return "redirect:/numbers";
     }
 
     @GetMapping("/refresh{id}")
     public String update(@RequestParam("id") int id, Model model) {
         model.addAttribute("number", numberService.getById(id));
+
         return "refresh";
     }
 
     @PostMapping("/refreshNumber")
     public String updateNumber(@ModelAttribute("number") Number number) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(role -> role.getAuthority().equals("ADMIN"));
+
+        if (!isAdmin) {
+            return "403";
+        }
+
         numberService.update(number);
+
         return "redirect:/refreshNumber?id=" + number.getId();
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Numbers</title>
@@ -15,6 +16,7 @@
                 <th>Second number</th>
                 <th>Result</th>
                 <th>Action</th>
+                <th sec:authorize="hasRole('ADMIN')">Actions</th>
             </tr>
             <tr th:each="number : ${numbers}">
                 <td th:text="${number.number1}"></td>
@@ -26,6 +28,10 @@
                     | <a th:href="@{/delete(id=${number.id})}"
                          th:onclick="if (!(confirm('Are you sure you want to delete this record?'))) return false;">Delete</a>
                     | <a th:href="@{/view(id=${number.id})}">Show</a>
+                <td class="actions" sec:authorize="hasRole('ADMIN')">
+                    <a th:href="@{'/refresh/' + ${number.numberID}}" class="edit-link">Edit</a>
+                    <a th:href="@{'/delete/' + ${number.numberId}}" class="delete-link">Delete</a>
+                </td>
                 </td>
             </tr>
         </table>
