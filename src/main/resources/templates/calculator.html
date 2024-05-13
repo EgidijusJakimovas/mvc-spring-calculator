@@ -40,7 +40,7 @@
         <p th:each="authority : ${#authentication.principal.authorities}">
             <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
             <span th:if="${authority.authority == 'USER'}">USER</span>
-            <span th:if="${authority.authority == 'ADMIN'}">USER</span>
+            <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
         </p>
     </div>
 </div>
