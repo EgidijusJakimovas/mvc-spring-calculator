@@ -20,6 +20,6 @@ public class MvcConfig implements WebMvcConfigurer {
 }
 
 // TODO:
-//       3. validacija registruotiem vartotojam patikrinant ar nera username ir email panaudotas
-//       5. vientisas stylius (visoms formoms bendras footeris, headeris ir menu). Menu juostoje varotojas mato prisijungimo
+//       1. validacija registruotiem vartotoja email panaudotas
+//       2. vientisas stylius (visoms formoms bendras footeris, headeris ir menu). Menu juostoje varotojas mato prisijungimo
 //       varda ir gali atsijungti. Menu juostuoje yra nuorodos i formas (skaiciuoti, perziureti, atnaujinti)

@@ -76,10 +76,16 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerNewUser(@ModelAttribute("user") User user, BindingResult result) {
+    public String registerNewUser(@ModelAttribute("user") User user, BindingResult result, Model model) {
         userValidator.validate(user, result);
 
         if (result.hasErrors()) {
+            if (userService.isUsernameTaken(user.getUsername())) {
+                model.addAttribute("usernameError", "Username is already taken.");
+            }
+            if (userService.isEmailTaken(user.getEmail())) {
+                model.addAttribute("emailError", "Email is already taken.");
+            }
             return "register";
         }
 
@@ -87,7 +93,6 @@ public class UserController {
 
         return "redirect:/login";
     }
-
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {

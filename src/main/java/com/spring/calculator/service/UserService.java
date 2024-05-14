@@ -10,11 +10,11 @@ public interface UserService {
 
     User findByUsername(String username);
 
-    User findUserByEmail(String email);
+    User findByEmail(String email);
 
-    boolean isEmailAlreadyTaken(String email);
+    boolean isEmailTaken(String email);
 
-    boolean isUsernameAlreadyTaken(String username);
+    boolean isUsernameTaken(String username);
 
     List<User> findAllUsers();
 

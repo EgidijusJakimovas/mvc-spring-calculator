@@ -33,18 +33,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByEmail(String email) {
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
-    public boolean isEmailAlreadyTaken(String email) {
+    public boolean isEmailTaken(String email) {
         User user = userRepository.findByEmail(email);
         return user != null;
     }
 
     @Override
-    public boolean isUsernameAlreadyTaken(String username) {
+    public boolean isUsernameTaken(String username) {
         User user = userRepository.findByUsername(username);
         return user != null;
     }
