@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Numbers</title>
@@ -16,7 +15,6 @@
                 <th>Second number</th>
                 <th>Result</th>
                 <th>Action</th>
-                <th sec:authorize="hasRole('ADMIN')">Actions</th>
             </tr>
             <tr th:each="number : ${numbers}">
                 <td th:text="${number.number1}"></td>
