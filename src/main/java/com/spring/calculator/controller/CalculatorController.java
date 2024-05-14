@@ -89,6 +89,13 @@ public class CalculatorController {
     @GetMapping("/update{id}")
     public String update(@RequestParam("id") int id, Model model) {
         model.addAttribute("number", numberService.getById(id));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(role -> role.getAuthority().equals("ADMIN"));
+
+        if (!isAdmin) {
+            return "403";
+        }
 
         return "update";
     }
