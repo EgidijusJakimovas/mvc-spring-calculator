@@ -24,12 +24,12 @@
                 <td th:text="${number.number2}"></td>
                 <td th:text="${number.result}"></td>
                 <td>
-                    <a th:href="@{/refresh(id=${number.id})}">Update</a>
+                    <a th:href="@{/update(id=${number.id})}">Update</a>
                     | <a th:href="@{/delete(id=${number.id})}"
                          th:onclick="if (!(confirm('Are you sure you want to delete this record?'))) return false;">Delete</a>
                     | <a th:href="@{/view(id=${number.id})}">Show</a>
                 <td class="actions" sec:authorize="hasRole('ADMIN')">
-                    <a th:href="@{'/refresh/' + ${number.numberID}}" class="edit-link">Edit</a>
+                    <a th:href="@{'/update/' + ${number.numberID}}" class="edit-link">Edit</a>
                     <a th:href="@{'/delete/' + ${number.numberId}}" class="delete-link">Delete</a>
                 </td>
                 </td>

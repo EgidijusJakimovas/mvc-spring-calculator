@@ -86,14 +86,14 @@ public class CalculatorController {
         return "redirect:/numbers";
     }
 
-    @GetMapping("/refresh{id}")
+    @GetMapping("/update{id}")
     public String update(@RequestParam("id") int id, Model model) {
         model.addAttribute("number", numberService.getById(id));
 
-        return "refresh";
+        return "update";
     }
 
-    @PostMapping("/refreshNumber")
+    @PostMapping("/updateNumber")
     public String updateNumber(@ModelAttribute("number") Number number) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isAdmin = authentication.getAuthorities().stream()
@@ -105,6 +105,6 @@ public class CalculatorController {
 
         numberService.update(number);
 
-        return "redirect:/refreshNumber?id=" + number.getId();
+        return "redirect:/updateNumber?id=" + number.getId();
     }
 }
