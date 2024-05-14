@@ -13,9 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class CalculatorController {
@@ -28,16 +32,15 @@ public class CalculatorController {
     @Qualifier("UserService")
     public UserService userService;
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/calculator")
+    @GetMapping("/calculator")
     public String home(Model model) {
         model.addAttribute("number", new Number());
         return "calculator";
     }
 
     @PostMapping("/calculate")
-    String calculate(@Valid @ModelAttribute("number") Number number, BindingResult br,
-                     @RequestParam HashMap<String, String> numbers, ModelMap modelMap) {
+    public String calculate(@Valid @ModelAttribute("number") Number number, BindingResult br,
+                            @RequestParam HashMap<String, String> numbers, ModelMap modelMap) {
         if (br.hasErrors()) {
             return "calculator";
         } else {
@@ -45,7 +48,6 @@ public class CalculatorController {
             int number2 = Integer.parseInt(numbers.get("number2"));
             String operation = numbers.get("operation");
 
-            System.out.println("Results: " + numbers.entrySet());
             int result = switch (operation) {
                 case "+" -> number1 + number2;
                 case "-" -> number1 - number2;
@@ -74,58 +76,67 @@ public class CalculatorController {
 
     @GetMapping("/numbers")
     public String getAllNumbers(Model model) {
-        model.addAttribute("numbers", numberService.getAll());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        User currentUser = userService.findByUsername(currentUserName);
+
+        boolean isAdmin = currentUser.getRole() == User.UserRole.ADMIN;
+        List<Number> numbers;
+        if (isAdmin) {
+            numbers = numberService.getAll();
+        } else {
+            numbers = currentUser.getCalculationsList();
+        }
+        model.addAttribute("numbers", numbers);
         return "numbers";
     }
 
     @GetMapping("/view{id}")
     public String getById(@RequestParam("id") int id, Model model) {
-        model.addAttribute("number", numberService.getById(id));
+        Number number = numberService.getById(id);
+        model.addAttribute("number", number);
         return "number";
     }
 
     @GetMapping("/delete{id}")
     public String delete(@RequestParam("id") int id, Model model) {
-        model.addAttribute("numbers", numberService.getAll());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isAdmin = authentication.getAuthorities().stream()
-                .anyMatch(role -> role.getAuthority().equals("ADMIN"));
+        String currentUserName = authentication.getName();
+        User currentUser = userService.findByUsername(currentUserName);
 
+        boolean isAdmin = currentUser.getRole() == User.UserRole.ADMIN;
         if (!isAdmin) {
             return "403";
         }
 
         numberService.delete(id);
-
         return "redirect:/numbers";
     }
 
     @GetMapping("/update{id}")
     public String update(@RequestParam("id") int id, Model model) {
-        model.addAttribute("number", numberService.getById(id));
+        Number number = numberService.getById(id);
+        model.addAttribute("number", number);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isAdmin = authentication.getAuthorities().stream()
-                .anyMatch(role -> role.getAuthority().equals("ADMIN"));
-
+        String currentUserName = authentication.getName();
+        User currentUser = userService.findByUsername(currentUserName);
+        boolean isAdmin = currentUser.getRole() == User.UserRole.ADMIN;
         if (!isAdmin) {
             return "403";
         }
-
         return "update";
     }
 
     @PostMapping("/updateNumber")
     public String updateNumber(@ModelAttribute("number") Number number) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isAdmin = authentication.getAuthorities().stream()
-                .anyMatch(role -> role.getAuthority().equals("ADMIN"));
-
+        String currentUserName = authentication.getName();
+        User currentUser = userService.findByUsername(currentUserName);
+        boolean isAdmin = currentUser.getRole() == User.UserRole.ADMIN;
         if (!isAdmin) {
             return "403";
         }
-
         numberService.update(number);
-
         return "redirect:/updateNumber?id=" + number.getId();
     }
 }
