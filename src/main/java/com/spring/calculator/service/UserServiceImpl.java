@@ -56,11 +56,16 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
-    private User convertEntityToDto(User user){
+    private User convertEntityToDto(User user) {
         User userDto = new User();
         String[] name = user.getUsername().split(" ");
         userDto.setUsername(name[0]);
         userDto.setEmail(user.getEmail());
         return userDto;
+    }
+
+    @Override
+    public User findByIdWithCalculations(int id) {
+        return userRepository.findByIdWithCalculations(id);
     }
 }

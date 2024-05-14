@@ -21,11 +21,11 @@ public class Number {
     private int id;
 
     @Min(value = 0, message = "Validation error: Number cannot be negative.")
-    @Column(name = "number1")
+    @Column(name = "number_1")
     private int number1;
 
     @Min(value = 0, message = "Validation error: Number cannot be negative")
-    @Column(name = "number2")
+    @Column(name = "number_2")
     private int number2;
 
     @Column(name = "operation")
@@ -33,6 +33,10 @@ public class Number {
 
     @Column(name = "result")
     private int result;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User users;
 
     public Number(int number1, int number2, String operation, int result) {
         this.number1 = number1;

@@ -1,7 +1,9 @@
 package com.spring.calculator.controller;
 
 import com.spring.calculator.model.Number;
+import com.spring.calculator.model.User;
 import com.spring.calculator.service.NumberService;
+import com.spring.calculator.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +23,11 @@ public class CalculatorController {
     @Autowired
     @Qualifier("NumberService")
     public NumberService numberService;
+
+    @Autowired
+    @Qualifier("UserService")
+    public UserService userService;
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/calculator")
     public String home(Model model) {
@@ -47,12 +54,19 @@ public class CalculatorController {
                 default -> 0;
             };
 
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentUserName = authentication.getName();
+            User currentUser = userService.findByUsername(currentUserName);
+
+            Number calculation = new Number(number1, number2, operation, result);
+            calculation.setUsers(currentUser);
+
+            numberService.save(calculation);
+
             modelMap.put("number1", number1);
             modelMap.put("number2", number2);
             modelMap.put("operation", operation);
             modelMap.put("result", result);
-
-            numberService.save(new Number(number1, number2, operation, result));
 
             return "calculate";
         }

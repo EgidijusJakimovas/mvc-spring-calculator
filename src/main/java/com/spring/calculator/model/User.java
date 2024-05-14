@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,7 +31,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private int id;
 
     @NotNull(message = "username cannot be null")
@@ -55,6 +57,17 @@ public class User {
     @Transient
     @NotBlank(message = "Password confirmation is required")
     private String passwordConfirm;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private List<Number> calculationsList;
+
+    public List<Number> getNumbers() {
+        return calculationsList;
+    }
+
+    public void setNumbers(List<Number> calculationsList) {
+        this.calculationsList = calculationsList;
+    }
 
     @Override
     public String toString() {
