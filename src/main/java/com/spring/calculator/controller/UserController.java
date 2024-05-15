@@ -82,6 +82,8 @@ public class UserController {
         if (result.hasErrors()) {
             if (userService.isUsernameTaken(user.getUsername())) {
                 model.addAttribute("usernameError", "Username is already taken.");
+            } else if (result.hasFieldErrors("username")) {
+                model.addAttribute("usernameError", "Username must be 3 or more characters long.");
             }
             if (userService.isEmailTaken(user.getEmail())) {
                 model.addAttribute("emailError", "Email is already taken.");
