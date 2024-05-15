@@ -17,7 +17,6 @@ public class SpringConfig {
     private final NumberRepository numberRepository;
     private final UserRepository userRepository;
 
-
     @Autowired
     public SpringConfig(NumberRepository numberRepository, UserRepository userRepository) {
         this.numberRepository = numberRepository;

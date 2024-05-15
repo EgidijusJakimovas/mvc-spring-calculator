@@ -14,7 +14,7 @@
                 <th>Operation</th>
                 <th>Second number</th>
                 <th>Result</th>
-                <th th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">User name</th>
+                <th th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">Username</th>
                 <th>Action</th>
             </tr>
             <tr th:each="number : ${numbers}">

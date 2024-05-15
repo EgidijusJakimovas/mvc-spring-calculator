@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecurityServiceImpl implements SecurityService {
 
-
     @Qualifier("auth")
     private AuthenticationManager authenticationManager;
 
