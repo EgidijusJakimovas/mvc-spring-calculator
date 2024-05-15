@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringConfig {
 
-    private final NumberRepository numberRepository;
-    private final UserRepository userRepository;
+    final NumberRepository numberRepository;
+    final UserRepository userRepository;
 
     @Autowired
     public SpringConfig(NumberRepository numberRepository, UserRepository userRepository) {

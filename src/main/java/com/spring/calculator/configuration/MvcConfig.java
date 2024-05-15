@@ -15,10 +15,10 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/calculate").setViewName("calculate");
         registry.addViewController("/number").setViewName("number");
         registry.addViewController("/numbers").setViewName("numbers");
-        registry.addViewController("/refresh").setViewName("refresh");
+        registry.addViewController("/update").setViewName("update");
     }
 }
 
 // TODO:
-//      vientisas stylius (visoms formoms bendras footeris, headeris ir menu). Menu juostoje varotojas mato prisijungimo
+//      vientisas stilius (visoms formoms bendras footeris, headeris ir menu). Menu juostoje varotojas mato prisijungimo
 //      varda ir gali atsijungti. Menu juostuoje yra nuorodos i formas (skaiciuoti, perziureti, atnaujinti)

@@ -36,7 +36,7 @@ public class User {
 
     @NotNull(message = "username cannot be null")
     @NotEmpty(message = "username cannot be blank")
-    @Column(name = "user_name", unique = true)
+    @Column(name = "username", unique = true)
     private String username;
 
     @Enumerated(EnumType.STRING)

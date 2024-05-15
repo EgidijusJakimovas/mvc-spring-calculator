@@ -35,6 +35,7 @@ public class CalculatorController {
     @GetMapping("/calculator")
     public String home(Model model) {
         model.addAttribute("number", new Number());
+
         return "calculator";
     }
 
@@ -81,13 +82,17 @@ public class CalculatorController {
         User currentUser = userService.findByUsername(currentUserName);
 
         boolean isAdmin = currentUser.getRole() == User.UserRole.ADMIN;
+
         List<Number> numbers;
+
         if (isAdmin) {
             numbers = numberService.getAll();
         } else {
             numbers = currentUser.getCalculationsList();
         }
+
         model.addAttribute("numbers", numbers);
+
         return "numbers";
     }
 
@@ -95,6 +100,7 @@ public class CalculatorController {
     public String getById(@RequestParam("id") int id, Model model) {
         Number number = numberService.getById(id);
         model.addAttribute("number", number);
+
         return "number";
     }
 
@@ -110,6 +116,7 @@ public class CalculatorController {
         }
 
         numberService.delete(id);
+
         return "redirect:/numbers";
     }
 
@@ -120,23 +127,37 @@ public class CalculatorController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         User currentUser = userService.findByUsername(currentUserName);
+
         boolean isAdmin = currentUser.getRole() == User.UserRole.ADMIN;
         if (!isAdmin) {
+
             return "403";
         }
+
         return "update";
     }
 
     @PostMapping("/updateNumber")
-    public String updateNumber(@ModelAttribute("number") Number number) {
+    public String updateNumber(@ModelAttribute("number") Number updatedNumber, BindingResult result) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         User currentUser = userService.findByUsername(currentUserName);
-        boolean isAdmin = currentUser.getRole() == User.UserRole.ADMIN;
-        if (!isAdmin) {
+
+        if (currentUser.getRole() != User.UserRole.ADMIN) {
             return "403";
         }
-        numberService.update(number);
-        return "redirect:/updateNumber?id=" + number.getId();
+
+        Number originalNumber = numberService.getById(updatedNumber.getId());
+
+        updatedNumber.setUsers(originalNumber.getUsers());
+
+        originalNumber.setNumber1(updatedNumber.getNumber1());
+        originalNumber.setNumber2(updatedNumber.getNumber2());
+        originalNumber.setOperation(updatedNumber.getOperation());
+        originalNumber.setResult(updatedNumber.getResult());
+
+        numberService.update(originalNumber);
+
+        return "redirect:/view?id=" + originalNumber.getId();
     }
 }
