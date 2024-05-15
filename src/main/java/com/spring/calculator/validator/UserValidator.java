@@ -4,6 +4,7 @@ import com.spring.calculator.model.User;
 import com.spring.calculator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -15,6 +16,10 @@ public class UserValidator implements Validator {
     @Autowired
     @Qualifier("UserService")
     private UserService userService;
+
+    @Autowired
+    @Qualifier("BCryptPasswordEncoder")
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -31,6 +36,9 @@ public class UserValidator implements Validator {
         }
         if (userService.findByUsername(user.getUsername()) != null) {
             errors.rejectValue("username", "Duplicate.userForm.username");
+        }
+        if (userService.findByEmail(user.getEmail()) != null) {
+            errors.rejectValue("email", "Duplicate.userForm.email");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");

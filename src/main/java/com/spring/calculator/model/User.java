@@ -36,7 +36,7 @@ public class User {
 
     @NotNull(message = "username cannot be null")
     @NotEmpty(message = "username cannot be blank")
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true)
     private String username;
 
     @Enumerated(EnumType.STRING)
@@ -46,7 +46,7 @@ public class User {
     @Email(message = "Enter a valid email address")
     @NotNull(message = "email cannot be null")
     @NotEmpty(message = "email cannot be blank")
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @NotNull(message = "password cannot be null")
@@ -60,14 +60,6 @@ public class User {
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List<Number> calculationsList;
-
-    public List<Number> getNumbers() {
-        return calculationsList;
-    }
-
-    public void setNumbers(List<Number> calculationsList) {
-        this.calculationsList = calculationsList;
-    }
 
     @Override
     public String toString() {

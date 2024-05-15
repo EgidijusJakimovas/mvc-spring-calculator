@@ -14,7 +14,7 @@
                 <th>Operation</th>
                 <th>Second number</th>
                 <th>Result</th>
-                <th>User name</th>
+                <th th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">User name</th>
                 <th>Action</th>
             </tr>
             <tr th:each="number : ${numbers}">
@@ -22,7 +22,7 @@
                 <td th:text="${number.operation}"></td>
                 <td th:text="${number.number2}"></td>
                 <td th:text="${number.result}"></td>
-                <td th:text="${number.users.username}"></td>
+                <td th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}" th:text="${number.users.username}"></td>
                 <td>
                     <div th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
                         <a th:href="@{/update(id=${number.id})}">Edit | </a>
