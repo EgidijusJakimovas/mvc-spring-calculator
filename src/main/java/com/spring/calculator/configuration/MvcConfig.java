@@ -18,3 +18,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/refresh").setViewName("refresh");
     }
 }
+
+// TODO:
+//      vientisas stylius (visoms formoms bendras footeris, headeris ir menu). Menu juostoje varotojas mato prisijungimo
+//      varda ir gali atsijungti. Menu juostuoje yra nuorodos i formas (skaiciuoti, perziureti, atnaujinti)
