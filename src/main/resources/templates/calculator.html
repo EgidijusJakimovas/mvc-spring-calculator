@@ -8,7 +8,7 @@
 <body>
 <nav class="navbar navbar-default">
     <div class="user-info">
-        <p th:each="authority : ${#authentication.principal.authorities}">
+        <p class="p-user" th:each="authority : ${#authentication.principal.authorities}">
             <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
             <span th:if="${authority.authority == 'USER'}">USER</span>
             <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
@@ -31,22 +31,21 @@
 </nav>
 <div class="container">
     <h2>Online Calculator</h2>
-    <form method="post" action="calculate" th:object="${number}" autocomplete="off">
+    <form method="post" th:action=@{/calculate} th:object="${number}" autocomplete="off">
         <div class="input-field">
-            <label>First number:</label>
-            <span class="error-message" th:if="${#fields.hasErrors('number1')}"
-                  th:errors="*{number1}"></span>
-            <input type="number" name="number1" required>
+            <label> First number:
+                <input type="number" name="number1" required>
+                <span class="error-message" th:if="${#fields.hasErrors('number1')}" th:errors="*{number1}"></span>
+            </label>
         </div>
         <div class="input-field">
-            <label>Second number:</label>
-            <span class="error-message" th:if="${#fields.hasErrors('number2')}"
-                  th:errors="*{number2}"></span>
-            <input type="number" name="number2" required>
+            <label> Second number:
+                <input type="number" name="number2" required>
+                <span class="error-message" th:if="${#fields.hasErrors('number2')}" th:errors="*{number2}"></span>
+            </label>
         </div>
         <div class="input-field">
-            <label>Operation:</label>
-            <label>
+            <label> Operation:
                 <select name="operation" required>
                     <option value="+">Addition</option>
                     <option value="-">Subtraction</option>
