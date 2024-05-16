@@ -1,4 +1,4 @@
-package com.spring.calculator.configuration;
+package com.spring.calculator.config;
 
 import com.spring.calculator.repository.NumberRepository;
 import com.spring.calculator.repository.UserRepository;
