@@ -17,6 +17,8 @@ import java.util.regex.Pattern;
 public class UserValidator implements Validator {
 
     private static final String EMAIL_REGEX_PATTERN = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$";
+    private static final String PASSWORD_REGEX_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
+
 
     @Autowired
     @Qualifier("UserService")
@@ -52,7 +54,7 @@ public class UserValidator implements Validator {
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-        if (user.getPassword().length() < 3 || user.getPassword().length() > 32) {
+        if (!isValidPassword(user.getPassword())) {
             errors.rejectValue("password", "Size.userForm.password");
         }
         if (!user.getPasswordConfirm().equals(user.getPassword())) {
@@ -63,6 +65,12 @@ public class UserValidator implements Validator {
     private boolean isValidEmail(String email) {
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
         Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        Pattern pattern = Pattern.compile(PASSWORD_REGEX_PATTERN);
+        Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }
 }
