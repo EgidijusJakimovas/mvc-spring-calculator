@@ -7,16 +7,17 @@
 </head>
 <body>
 <div class="container">
-    <form name="number" th:action="@{/updateNumber}" method="post">
+    <form name="number" th:action="@{/updateNumber}" th:object="${number}" method="post">
         <input type="hidden" name="id" th:value="${number.id}">
         <div class="input-field">
             <label for="number1">First number:</label>
             <input type="number" id="number1" name="number1" th:value="${number.number1}" required>
         </div>
         <div class="input-field">
-            <label for="operation">Operation:</label>
-            <input type="text" id="operation" name="operation" th:value="${number.operation}"
-                   style="text-align: center;" required oninput="validateOperation(event)">
+            <span class="error-message" th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}"></span>
+            <label>Operation:</label>
+            <input type="text" name="operation" th:value="${number.operation}"
+                   style="text-align: center;" required>
         </div>
         <div class="input-field">
             <label for="number2">Second number:</label>
@@ -32,16 +33,5 @@
         <button class="btn" type="submit">Back to Numbers</button>
     </form>
 </div>
-<script>
-    function validateOperation(event) {
-        var input = event.target;
-        var operationValue = input.value.trim();
-        if (operationValue.length !== 1 || !'+-*/'.includes(operationValue)) {
-            input.setCustomValidity('Please enter only one of the following characters: +, -, *, /');
-        } else {
-            input.setCustomValidity('');
-        }
-    }
-</script>
 </body>
 </html>

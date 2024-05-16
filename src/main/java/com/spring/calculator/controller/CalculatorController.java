@@ -152,6 +152,12 @@ public class CalculatorController {
             return "403";
         }
 
+        numberValidator.validate(updatedNumber, result);
+
+        if (result.hasErrors()) {
+            return "update";
+        }
+
         Number originalNumber = numberService.getById(updatedNumber.getId());
 
         updatedNumber.setUsers(originalNumber.getUsers());

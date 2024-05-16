@@ -8,6 +8,8 @@ import org.springframework.validation.Validator;
 @Component
 public class NumberValidator implements Validator {
 
+    private static final String OPERATION_REGEX = "[+\\-*/]";
+
     @Override
     public boolean supports(Class<?> aClass) {
         return Number.class.equals(aClass);
@@ -24,5 +26,13 @@ public class NumberValidator implements Validator {
         if (number.getNumber2() < 0) {
             errors.rejectValue("number2", "Negative.numberForm.number2");
         }
+
+        if (!isValidOperation(number.getOperation())) {
+            errors.rejectValue("operation", "Invalid.operation");
+        }
+    }
+
+    private boolean isValidOperation(String operation) {
+        return operation != null && operation.matches(OPERATION_REGEX);
     }
 }
