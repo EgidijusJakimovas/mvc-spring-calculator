@@ -8,18 +8,22 @@
 <body>
 <div class="container">
     <h2>Online Calculator</h2>
-    <form method="post" action="calculate" autocomplete="off">
+    <form method="post" action="calculate" th:object="${number}" autocomplete="off">
         <div class="input-field">
             <label for="number1">First number:</label>
-            <input type="number" id="number1" name="number1" required min="0">
+            <span class="error-message" th:if="${#fields.hasErrors('number1')}"
+                  th:errors="*{number1}"></span>
+            <input type="number" id="number1" name="number1" required>
         </div>
         <div class="input-field">
             <label for="number2">Second number:</label>
-            <input type="number" id="number2" name="number2" required min="0">
+            <span class="error-message" th:if="${#fields.hasErrors('number2')}"
+                  th:errors="*{number2}"></span>
+            <input type="number" id="number2" name="number2" required>
         </div>
         <div class="input-field">
             <label for="operation">Operation:</label>
-            <select id="operation" name="operation">
+            <select id="operation" name="operation" required>
                 <option value="+">Addition</option>
                 <option value="-">Subtraction</option>
                 <option value="*">Multiplication</option>
@@ -41,13 +45,13 @@
             <button class="btn" type="submit">Registered Users</button>
         </form>
     </div>
-    </div>
-    <div class="user-info">
-        <p th:each="authority : ${#authentication.principal.authorities}">
-            <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
-            <span th:if="${authority.authority == 'USER'}">USER</span>
-            <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
-        </p>
-    </div>
+</div>
+<div class="user-info">
+    <p th:each="authority : ${#authentication.principal.authorities}">
+        <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
+        <span th:if="${authority.authority == 'USER'}">USER</span>
+        <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
+    </p>
+</div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package com.spring.calculator.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,11 +19,9 @@ public class Number {
     @Column(name = "id")
     private int id;
 
-    @Min(value = 0, message = "Validation error: Number cannot be negative.")
     @Column(name = "number_1")
     private int number1;
 
-    @Min(value = 0, message = "Validation error: Number cannot be negative")
     @Column(name = "number_2")
     private int number2;
 

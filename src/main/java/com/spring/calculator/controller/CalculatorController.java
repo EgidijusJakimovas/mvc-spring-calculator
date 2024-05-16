@@ -4,7 +4,7 @@ import com.spring.calculator.model.Number;
 import com.spring.calculator.model.User;
 import com.spring.calculator.service.NumberService;
 import com.spring.calculator.service.UserService;
-import jakarta.validation.Valid;
+import com.spring.calculator.validator.NumberValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -32,6 +32,9 @@ public class CalculatorController {
     @Qualifier("UserService")
     public UserService userService;
 
+    @Autowired
+    private NumberValidator numberValidator;
+
     @GetMapping("/calculator")
     public String home(Model model) {
         model.addAttribute("number", new Number());
@@ -40,8 +43,10 @@ public class CalculatorController {
     }
 
     @PostMapping("/calculate")
-    public String calculate(@Valid @ModelAttribute("number") Number number, BindingResult br,
+    public String calculate(@ModelAttribute("number") Number number, BindingResult br,
                             @RequestParam HashMap<String, String> numbers, ModelMap modelMap) {
+        numberValidator.validate(number, br);
+
         if (br.hasErrors()) {
             return "calculator";
         } else {
