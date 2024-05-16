@@ -58,8 +58,8 @@ public class UserController {
 
         User userFromDB = userService.findByUsername(loginUser.getUsername());
 
-        logger.info("Entered Username: {}", loginUser.getUsername());
-        logger.info("Entered Password (Hashed): {}", bCryptPasswordEncoder.encode(loginUser.getPassword()));
+        logger.info(loginUser.getUsername());
+        logger.info(bCryptPasswordEncoder.encode(loginUser.getPassword()));
 
         if (bCryptPasswordEncoder.matches(loginUser.getPassword(), userFromDB.getPassword())) {
             session.setAttribute("username", userFromDB.getUsername());
