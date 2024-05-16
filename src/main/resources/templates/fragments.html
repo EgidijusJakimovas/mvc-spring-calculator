@@ -3,7 +3,6 @@
 <div th:fragment="style">
     <meta charset="UTF-8">
     <title>Fragments</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,7 +12,7 @@
         }
 
         .container {
-            width: 300px;
+            width: 250px;
             margin: 50px auto;
             background-color: #fff;
             padding: 20px;
@@ -64,12 +63,11 @@
             text-align: center;
         }
 
-        .container form input[type="text"],
-        .container form input[type="email"],
-        .container form input[type="password"] {
+        .container input[type="text"],
+        .container input[type="email"],
+        .container input[type="password"] {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 3px;
             box-sizing: border-box;
@@ -94,7 +92,7 @@
             color: red;
             text-align: center;
             margin-top: 5px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .success-message {
@@ -141,7 +139,7 @@
 
         .input-field label {
             display: block;
-            font-weight: bold;
+            margin-bottom: 100px;
         }
 
         .input-field input[type="number"],
@@ -210,6 +208,11 @@
         .nav-btn-group {
             display: inline-flex;
         }
+
+        .div-label {
+            margin-bottom: 25px;
+        }
+
 
     </style>
     <body style="background-color: #eee;"></body>

@@ -45,7 +45,6 @@ public class User {
     private String password;
 
     @Transient
-    @NotBlank(message = "Password confirmation is required")
     private String passwordConfirm;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
