@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Number</title>
@@ -11,25 +11,33 @@
         <input type="hidden" name="id" th:value="${number.id}">
         <div class="input-field">
             <label>First number:</label>
-            <input type="number" name="number1" th:value="${number.number1}" required>
+            <label>
+                <input type="number" name="number1" th:value="${number.number1}" required>
+            </label>
         </div>
         <div class="input-field">
             <span class="error-message" th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}"></span>
             <label>Operation:</label>
-            <input type="text" name="operation" th:value="${number.operation}"
-                   style="text-align: center;" required>
+            <label>
+                <input type="text" name="operation" th:value="${number.operation}"
+                       style="text-align: center;" required>
+            </label>
         </div>
         <div class="input-field">
             <label>Second number:</label>
-            <input type="number" name="number2" th:value="${number.number2}" required>
+            <label>
+                <input type="number" name="number2" th:value="${number.number2}" required>
+            </label>
         </div>
         <div class="input-field">
             <label>Result:</label>
-            <input type="number" name="result" th:value="${number.result}" required>
+            <label>
+                <input type="number" name="result" th:value="${number.result}" required>
+            </label>
         </div>
         <button class="btn" type="submit">Update</button>
     </form>
-    <form action="/numbers" method="get">
+    <form th:action="@{/numbers}" method="get">
         <button class="btn" type="submit">Back to Numbers</button>
     </form>
 </div>
