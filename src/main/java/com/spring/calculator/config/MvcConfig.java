@@ -24,5 +24,4 @@ public class MvcConfig implements WebMvcConfigurer {
 //      varda ir gali atsijungti. Menu juostuoje yra nuorodos i formas (skaiciuoti, perziureti, atnaujinti)
 //      2. kai bus sutvarkyta vartotojo validacija identiskai sutvarkyti number validator
 //      3. atskiru commitu simplegrandet klase i utils package
-//      4. rename configuration i config
 //      5. pabandyti mvc config paliekant kontroleryje
