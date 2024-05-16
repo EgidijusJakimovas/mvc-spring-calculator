@@ -11,7 +11,3 @@ public class ServletInitializer extends SpringBootServletInitializer {
         return application.sources(CalculatorApplication.class);
     }
 }
-
-// TODO:
-//      vientisas stilius (visoms formoms bendras footeris, headeris ir menu). Menu juostoje varotojas mato prisijungimo
-//      varda ir gali atsijungti. Menu juostuoje yra nuorodos i formas (skaiciuoti, perziureti, atnaujinti)

@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
     <div th:replace="fragments :: style"></div>
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="user-info">
+        <p th:each="authority : ${#authentication.principal.authorities}">
+            <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
+            <span th:if="${authority.authority == 'USER'}">USER</span>
+            <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
+        </p>
+    </div>
+    <ul class="navbar-right">
+        <div class="nav-btn-group">
+            <form th:action="@{/numbers}" method="get">
+                <button class="nav-btn" type="submit">Calculations</button>
+            </form>
+            <form th:action="@{/users}" method="get"
+                  th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
+                <button class="nav-btn" type="submit">Registered Users</button>
+            </form>
+            <form th:action="@{/logout}" method="post">
+                <button class="nav-btn" type="submit">Sign out</button>
+            </form>
+        </div>
+    </ul>
+</nav>
 <div class="container">
     <h2>Online Calculator</h2>
     <form method="post" action="calculate" th:object="${number}" autocomplete="off">
@@ -23,35 +46,19 @@
         </div>
         <div class="input-field">
             <label>Operation:</label>
-            <select name="operation" required>
-                <option value="+">Addition</option>
-                <option value="-">Subtraction</option>
-                <option value="*">Multiplication</option>
-                <option value="/">Division</option>
-            </select>
+            <label>
+                <select name="operation" required>
+                    <option value="+">Addition</option>
+                    <option value="-">Subtraction</option>
+                    <option value="*">Multiplication</option>
+                    <option value="/">Division</option>
+                </select>
+            </label>
         </div>
         <form th:action="@{/calculate}" method="post">
             <button class="btn" type="submit">Calculate</button>
         </form>
     </form>
-    <form th:action="@{/numbers}" method="get">
-        <button class="btn" type="submit">Calculations</button>
-    </form>
-    <form th:action="@{/logout}" method="post">
-        <button class="btn" type="submit">Sign out</button>
-    </form>
-    <div th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
-        <form th:action="@{/users}" method="get">
-            <button class="btn" type="submit">Registered Users</button>
-        </form>
-    </div>
-</div>
-<div class="user-info">
-    <p th:each="authority : ${#authentication.principal.authorities}">
-        <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
-        <span th:if="${authority.authority == 'USER'}">USER</span>
-        <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
-    </p>
 </div>
 </body>
 </html>
