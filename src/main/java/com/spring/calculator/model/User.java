@@ -1,10 +1,7 @@
 package com.spring.calculator.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,8 +31,6 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @NotNull(message = "username cannot be null")
-    @NotEmpty(message = "username cannot be blank")
     @Column(name = "username", unique = true)
     private String username;
 
@@ -43,14 +38,9 @@ public class User {
     @Column(name = "role")
     private UserRole role;
 
-    @Email(message = "Enter a valid email address")
-    @NotNull(message = "email cannot be null")
-    @NotEmpty(message = "email cannot be blank")
     @Column(name = "email", unique = true)
     private String email;
 
-    @NotNull(message = "password cannot be null")
-    @NotEmpty(message = "password cannot be blank")
     @Column(name = "password")
     private String password;
 

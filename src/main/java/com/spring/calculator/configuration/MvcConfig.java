@@ -20,5 +20,9 @@ public class MvcConfig implements WebMvcConfigurer {
 }
 
 // TODO:
-//      vientisas stilius (visoms formoms bendras footeris, headeris ir menu). Menu juostoje varotojas mato prisijungimo
+//      1. vientisas stilius (visoms formoms bendras footeris, headeris ir menu). Menu juostoje varotojas mato prisijungimo
 //      varda ir gali atsijungti. Menu juostuoje yra nuorodos i formas (skaiciuoti, perziureti, atnaujinti)
+//      2. kai bus sutvarkyta vartotojo validacija identiskai sutvarkyti number validator
+//      3. atskiru commitu simplegrandet klase i utils package
+//      4. rename configuration i config
+//      5. pabandyti mvc config paliekant kontroleryje

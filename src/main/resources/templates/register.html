@@ -8,18 +8,16 @@
 <body>
 <div class="container">
     <h2>Register</h2>
-    <div th:if="${usernameError}" class="error-message">
-        <span th:text="${usernameError}"></span>
-    </div>
-    <div th:if="${emailError}" class="error-message">
-        <span th:text="${emailError}"></span>
-    </div>
-    <form class="register-form" th:action="@{/register}" method="post" onsubmit="return validatePassword()">
+    <form class="register-form" th:action="@{/register}" th:object="${user}" method="post" onsubmit="return validatePassword()">
         <div>
+            <span class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
             <input type="text" name="username" placeholder="Username" required>
         </div>
         <div>
             <input type="email" name="email" placeholder="Email" required>
+            <div th:if="${emailError}" class="error-message">
+                <span th:text="${emailError}"></span>
+            </div>
         </div>
         <div>
             <input type="password" id="password" name="password" placeholder="Password"
