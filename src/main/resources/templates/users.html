@@ -26,8 +26,9 @@
         </tbody>
     </table>
     <form th:action="@{/calculator}" method="get">
-        <button type="submit" class="btn3">Back to Calculator</button>
+        <button type="submit" class="btn">Back to Calculator</button>
     </form>
 </div>
+<th:block th:replace="fragments-footer :: footer"></th:block>
 </body>
 </html>
