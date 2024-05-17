@@ -27,6 +27,10 @@ public class NumberValidator implements Validator {
             errors.rejectValue("number2", "Negative.numberForm.number2");
         }
 
+        if ((number.getNumber2() == 0) && (number.getOperation().equals("/"))) {
+            errors.rejectValue("number2", "DivisionByZero.numberForm.number2");
+        }
+
         if (!isValidOperation(number.getOperation())) {
             errors.rejectValue("operation", "Invalid.operation");
         }
