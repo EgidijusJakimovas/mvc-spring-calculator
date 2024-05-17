@@ -17,3 +17,4 @@ public class ServletInitializer extends SpringBootServletInitializer {
 //      3. paspelpti skaiciaus id nuo vartotojo
 //      4. menu juosta turi buti visur
 //      5. users ismeta 403 useriui
+//      6. menu juosta prilipusi
