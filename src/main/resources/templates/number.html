@@ -10,7 +10,7 @@
     <div class="table-responsive">
         <caption>Number information</caption>
         <table class="table table-striped">
-            <tr>
+            <tr th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
                 <td><b>Id:</b></td>
                 <td th:text="${number.id}"></td>
             </tr>
