@@ -16,11 +16,11 @@
             </label>
         </div>
         <div class="input-field">
-            <span class="error-message" th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}"></span>
             <label>Operation:</label>
             <label>
                 <input type="text" name="operation" th:value="${number.operation}"
                        style="text-align: center;" required>
+                <span class="error-message" th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}"></span>
             </label>
         </div>
         <div class="input-field">

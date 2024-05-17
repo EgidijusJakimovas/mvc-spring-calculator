@@ -32,7 +32,7 @@ public class NumberValidator implements Validator {
         }
 
         if (!isValidOperation(number.getOperation())) {
-            errors.rejectValue("operation", "Invalid.operation");
+            errors.rejectValue("operation", "Invalid.numberForm.operation");
         }
     }
 
