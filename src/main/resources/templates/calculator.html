@@ -6,28 +6,30 @@
     <th:block th:replace="fragments-header :: header"></th:block>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="user-info">
-        <p class="p-user" th:each="authority : ${#authentication.principal.authorities}">
-            <span th:text="'Welcome ' + ${#authentication.principal.username} + ', your role is '"></span>
-            <span th:if="${authority.authority == 'USER'}">USER</span>
-            <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
-        </p>
+<nav class="navbar">
+    <div class="user-info" th:each="authority : ${#authentication.principal.authorities}">
+        <span th:text="'Username: ' + ${#authentication.principal.username}"></span>
+        <br>
+        <span th:text="'Role: '"></span>
+        <span th:if="${authority.authority == 'USER'}">USER</span>
+        <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
     </div>
-    <ul class="navbar-right">
-        <div class="nav-btn-group">
-            <form th:action="@{/numbers}" method="get">
-                <button class="nav-btn" type="submit">Calculations</button>
-            </form>
-            <form th:action="@{/users}" method="get"
-                  th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
-                <button class="nav-btn" type="submit">Registered Users</button>
-            </form>
-            <form th:action="@{/logout}" method="post">
-                <button class="nav-btn" type="submit">Sign out</button>
-            </form>
-        </div>
-    </ul>
+    <div>
+        <form th:action="@{/numbers}" method="get">
+            <button class="nav-btn" type="submit">Calculations</button>
+        </form>
+    </div>
+    <div>
+        <form th:action="@{/users}" method="get"
+              th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
+            <button class="nav-btn2" type="submit">Registered Users</button>
+        </form>
+    </div>
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <button class="nav-btn3" type="submit">Sign out</button>
+        </form>
+    </div>
 </nav>
 <div class="container">
     <h2>Online Calculator</h2>
@@ -59,9 +61,9 @@
 </div>
 <th:block th:replace="fragments-footer :: footer"></th:block>
 <footer>
-        <p>Online Calculator with Administrator/User Interface.<br>
-            Spring MVC + Spring Boot 3 + Spring Security 6 + JPA + Hibernate + MySQL + Thymeleaf
-        </p>
+    <p>Online Calculator with Administrator/User Interface.<br>
+        Spring MVC + Spring Boot 3 + Spring Security 6 + JPA + Hibernate + MySQL + Thymeleaf
+    </p>
 </footer>
 </body>
 </html>
