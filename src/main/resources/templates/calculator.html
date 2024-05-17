@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
-    <div th:replace="fragments-header :: header"></div>
+    <th:block th:replace="fragments-header :: header"></th:block>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -31,7 +31,7 @@
 </nav>
 <div class="container">
     <h2>Online Calculator</h2>
-    <form method="post" th:action=@{/calculate} th:object="${number}" autocomplete="off">
+    <form method="post" th:action="@{/calculate}" th:object="${number}" autocomplete="off">
         <div class="input-field">
             <label> First number:
                 <input type="number" name="number1" required>
@@ -54,15 +54,14 @@
                 </select>
             </label>
         </div>
-        <form th:action="@{/calculate}" method="post">
-            <button class="btn" type="submit">Calculate</button>
-        </form>
+        <button class="btn" type="submit">Calculate</button>
     </form>
 </div>
-<footer th:replace="fragments-footer :: footer">
-    <p>
-        spring boot 3
-    </p>
+<th:block th:replace="fragments-footer :: footer"></th:block>
+<footer>
+        <p>Online Calculator with Administrator/User Interface.<br>
+            Spring MVC + Spring Boot 3 + Spring Security 6 + JPA + Hibernate + MySQL + Thymeleaf
+        </p>
 </footer>
 </body>
 </html>
