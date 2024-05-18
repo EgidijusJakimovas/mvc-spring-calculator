@@ -14,18 +14,16 @@
         <span th:if="${authority.authority == 'USER'}">USER</span>
         <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
     </div>
-    <div>
+    <div class="nav-left">
         <form th:action="@{/numbers}" method="get">
             <button class="nav-btn" type="submit">Calculations</button>
         </form>
-    </div>
-    <div>
         <form th:action="@{/users}" method="get"
               th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
             <button class="nav-btn2" type="submit">Registered Users</button>
         </form>
     </div>
-    <div>
+    <div class="nav-right">
         <form th:action="@{/logout}" method="post">
             <button class="nav-btn3" type="submit">Sign out</button>
         </form>
