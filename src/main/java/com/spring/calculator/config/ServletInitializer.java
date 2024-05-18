@@ -14,7 +14,5 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 // TODO:
 //      1. Invalid username or password validacija iskelti is HTML
-//      2. menu juosta turi buti visur
-//      3. menu juosta prilipusi
-//      4. prideti footeri visuose endpointuose
-//      5. dizainas
+//      2. dizainas
+//      3. max skaiciau klaida

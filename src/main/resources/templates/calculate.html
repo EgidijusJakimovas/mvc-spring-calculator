@@ -7,11 +7,27 @@
     <div th:replace="fragments-header :: header"></div>
 </head>
 <body>
-<div class="container">
+<nav class="navbar">
+    <div class="user-info" th:each="authority : ${#authentication.principal.authorities}">
+        <span th:text="'Username: ' + ${#authentication.principal.username}"></span>
+        <br>
+        <span th:text="'Role: '"></span>
+        <span th:if="${authority.authority == 'USER'}">USER</span>
+        <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
+    </div>
+    <div class="nav-left">
+        <form th:action="@{/calculator}" method="get">
+            <button type="submit" class="nav-btn2">Back to Calculator</button>
+        </form>
+    </div>
+    <div class="nav-right">
+        <form th:action="@{/logout}" method="post">
+            <button class="nav-btn3" type="submit">Sign out</button>
+        </form>
+    </div>
+</nav>
+<div class="calculateContainer">
     <h1 th:text="${number1} + ' ' + ${operation} + ' ' + ${number2} + ' = ' + ${result}"></h1>
-    <form th:action="@{/calculator}" method="get">
-        <button type="submit">Back to Calculator</button>
-    </form>
 </div>
 <th:block th:replace="fragments-footer :: footer"></th:block>
 </body>
