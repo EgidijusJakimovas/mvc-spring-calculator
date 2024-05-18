@@ -6,40 +6,54 @@
     <div th:replace="fragments-header :: header"></div>
 </head>
 <body>
-<div class="tableContainer">
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <tr>
-                <th>First number</th>
-                <th>Operation</th>
-                <th>Second number</th>
-                <th>Result</th>
-                <th th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">Username</th>
-                <th>Action</th>
-            </tr>
-            <tr th:each="number : ${numbers}">
-                <td th:text="${number.number1}"></td>
-                <td th:text="${number.operation}"></td>
-                <td th:text="${number.number2}"></td>
-                <td th:text="${number.result}"></td>
-                <td th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}"
-                    th:text="${number.users.username}"></td>
-                <td>
-                    <div th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
-                        <a th:href="@{/update(id=${number.id})}">Edit</a> |
-                        <a th:href="@{/delete(id=${number.id})}"
-                           th:onclick="if (!(confirm('Are you sure you want to delete this record?'))) return false;">Delete
-                        </a> |
-                    </div>
-                    <a th:href="@{/view(id=${number.id})}">Show</a>
-                </td>
-            </tr>
-        </table>
+<nav class="navbar">
+    <div class="user-info" th:each="authority : ${#authentication.principal.authorities}">
+        <span th:text="'Username: ' + ${#authentication.principal.username}"></span>
+        <br>
+        <span th:text="'Role: '"></span>
+        <span th:if="${authority.authority == 'USER'}">USER</span>
+        <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
     </div>
+    <div class="nav-left">
+        <form th:action="@{/calculator}" method="get">
+            <button type="submit" class="nav-btn2">Back to Calculator</button>
+        </form>
+    </div>
+    <div class="nav-right">
+        <form th:action="@{/logout}" method="post">
+            <button class="nav-btn3" type="submit">Sign out</button>
+        </form>
+    </div>
+</nav>
+<div class="tableContainer">
+    <table class="table table-striped">
+        <tr>
+            <th>First number</th>
+            <th>Operation</th>
+            <th>Second number</th>
+            <th>Result</th>
+            <th th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">Username</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="number : ${numbers}">
+            <td th:text="${number.number1}"></td>
+            <td th:text="${number.operation}"></td>
+            <td th:text="${number.number2}"></td>
+            <td th:text="${number.result}"></td>
+            <td th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}"
+                th:text="${number.users.username}"></td>
+            <td>
+                <div th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
+                    <a th:href="@{/update(id=${number.id})}">Edit</a> |
+                    <a th:href="@{/delete(id=${number.id})}"
+                       th:onclick="if (!(confirm('Are you sure you want to delete this record?'))) return false;">Delete
+                    </a> |
+                </div>
+                <a th:href="@{/view(id=${number.id})}">Show</a>
+            </td>
+        </tr>
+    </table>
 </div>
-<form th:action="@{/calculator}" method="get">
-    <button type="submit" class="btn2">Back to Calculator</button>
-</form>
 <th:block th:replace="fragments-footer :: footer"></th:block>
 </body>
 </html>
