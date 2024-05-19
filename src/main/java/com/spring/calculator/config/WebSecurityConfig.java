@@ -26,7 +26,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    @Qualifier("auth")
+    @Qualifier("authentication")
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
@@ -38,7 +38,7 @@ public class WebSecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/register", "/login", "/loginUser").permitAll()
+                        auth -> auth.requestMatchers("/register", "/login").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(login -> login.loginPage("/login")
                         .loginProcessingUrl("/loginUser")

@@ -28,15 +28,10 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    private SecurityService securityService;
-
-    @Autowired
     private UserValidator userValidator;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     public UserController(@Qualifier("UserService") UserService userService) {
@@ -50,20 +45,19 @@ public class UserController {
     }
 
     @PostMapping("/loginUser")
-    public String loginUser(@ModelAttribute("user") User loginUser, BindingResult result, HttpSession session) {
+    public String loginUser(@ModelAttribute("user") User user, BindingResult result, HttpSession session) {
 
-        userValidator.validate(loginUser, result);
+        userValidator.validate(user, result);
 
         if (result.hasErrors()) {
             return "login";
         }
 
-        User userFromDB = userService.findByUsername(loginUser.getUsername());
+        User userFromDB = userService.findByUsername(user.getUsername());
 
-        logger.info(loginUser.getUsername());
-        logger.info(bCryptPasswordEncoder.encode(loginUser.getPassword()));
+        bCryptPasswordEncoder.encode(user.getPassword());
 
-        if (bCryptPasswordEncoder.matches(loginUser.getPassword(), userFromDB.getPassword())) {
+        if (bCryptPasswordEncoder.matches(user.getPassword(), userFromDB.getPassword())) {
             session.setAttribute("username", userFromDB.getUsername());
             return "redirect:/calculator";
         } else {

@@ -15,3 +15,4 @@ public class    ServletInitializer extends SpringBootServletInitializer {
 // TODO:
 //      1. Invalid username or password validacija iskelti is HTML
 //      2. max skaiciau klaida
+//      3. grizus i login galima grizt atgal i calculator
