@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
-public class CalculatorController {
+public class NumberController {
 
     @Autowired
     @Qualifier("NumberService")
