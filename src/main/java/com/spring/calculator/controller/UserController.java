@@ -1,13 +1,10 @@
 package com.spring.calculator.controller;
 
 import com.spring.calculator.model.User;
-import com.spring.calculator.service.SecurityService;
 import com.spring.calculator.service.UserService;
 import com.spring.calculator.validator.UserValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -28,10 +25,10 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    private UserValidator userValidator;
+    UserValidator userValidator;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserController(@Qualifier("UserService") UserService userService) {
@@ -59,10 +56,8 @@ public class UserController {
 
         if (bCryptPasswordEncoder.matches(user.getPassword(), userFromDB.getPassword())) {
             session.setAttribute("username", userFromDB.getUsername());
-            return "redirect:/calculator";
-        } else {
-            return "redirect:/login";
         }
+        return "redirect:/calculator";
     }
 
     @GetMapping("/register")

@@ -30,10 +30,10 @@ public class CalculatorController {
 
     @Autowired
     @Qualifier("UserService")
-    public UserService userService;
+    UserService userService;
 
     @Autowired
-    private NumberValidator numberValidator;
+    NumberValidator numberValidator;
 
     @GetMapping("/calculator")
     public String home(Model model) {
