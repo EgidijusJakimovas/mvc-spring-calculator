@@ -45,13 +45,15 @@
             <td th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}"
                 th:text="${number.users.username}"></td>
             <td>
-                <div th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
-                    <a th:href="@{/update(id=${number.id})}">Edit</a> |
-                    <a th:href="@{/delete(id=${number.id})}"
+                <div>
+                    <a th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}"
+                       th:href="@{/update(id=${number.id})}">Edit </a> |
+                    <a th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}"
+                       th:href="@{/delete(id=${number.id})}"
                        th:onclick="if (!(confirm('Are you sure you want to delete this record?'))) return false;">Delete
                     </a> |
+                    <a th:href="@{/view(id=${number.id})}">Show</a>
                 </div>
-                <a th:href="@{/view(id=${number.id})}">Show</a>
             </td>
         </tr>
     </table>
