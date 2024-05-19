@@ -4,7 +4,7 @@ import com.spring.calculator.CalculatorApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-public class ServletInitializer extends SpringBootServletInitializer {
+public class    ServletInitializer extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -14,5 +14,4 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 // TODO:
 //      1. Invalid username or password validacija iskelti is HTML
-//      2. dizainas
-//      3. max skaiciau klaida
+//      2. max skaiciau klaida
