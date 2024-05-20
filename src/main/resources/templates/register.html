@@ -34,11 +34,11 @@
                       th:errors="*{passwordConfirm}"></span>
             </label>
         </div>
-        <button type="submit">Register</button>
+        <button class="btn-login" type="submit">Register</button>
     </form>
-    <div class="button-like-link">
+    <div>
         <form th:action="@{/login}" method="get">
-            <button type="submit">Back to Login</button>
+            <button class="btn-register" type="submit">Back to Login</button>
         </form>
     </div>
 </div>
