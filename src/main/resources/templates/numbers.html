@@ -17,7 +17,14 @@
     </div>
     <div class="nav-left">
         <form th:action="@{/calculator}" method="get">
-            <button type="submit" class="nav-btn2">Back</button>
+            <button class="nav-btn" type="submit">Calculator</button>
+        </form>
+        <form th:action="@{/numbers}" method="get">
+            <button class="nav-btn" type="submit">Calculations</button>
+        </form>
+        <form th:action="@{/users}" method="get"
+              th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
+            <button class="nav-btn2" type="submit">Registered Users</button>
         </form>
     </div>
     <div class="nav-right">
