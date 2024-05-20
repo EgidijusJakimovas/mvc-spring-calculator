@@ -16,6 +16,9 @@
         <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
     </div>
     <div class="nav-left">
+        <form th:action="@{/calculator}" method="get">
+            <button class="nav-btn" type="submit">Calculator</button>
+        </form>
         <form th:action="@{/numbers}" method="get">
             <button class="nav-btn" type="submit">Calculations</button>
         </form>
