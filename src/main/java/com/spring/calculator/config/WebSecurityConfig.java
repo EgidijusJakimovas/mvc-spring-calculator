@@ -1,6 +1,6 @@
 package com.spring.calculator.config;
 
-import com.spring.calculator.service.UserDetailsServiceImpl;
+import com.spring.calculator.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

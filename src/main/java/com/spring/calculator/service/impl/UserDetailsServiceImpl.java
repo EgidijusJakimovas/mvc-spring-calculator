@@ -1,4 +1,4 @@
-package com.spring.calculator.service;
+package com.spring.calculator.service.impl;
 
 import com.spring.calculator.model.User;
 import com.spring.calculator.repository.UserRepository;

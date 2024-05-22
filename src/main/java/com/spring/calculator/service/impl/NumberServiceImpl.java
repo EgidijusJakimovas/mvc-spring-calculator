@@ -1,7 +1,8 @@
-package com.spring.calculator.service;
+package com.spring.calculator.service.impl;
 
 import com.spring.calculator.model.Number;
 import com.spring.calculator.repository.NumberRepository;
+import com.spring.calculator.service.NumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,8 @@
-package com.spring.calculator.service;
+package com.spring.calculator.service.impl;
 
 import com.spring.calculator.model.User;
 import com.spring.calculator.repository.UserRepository;
+import com.spring.calculator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
