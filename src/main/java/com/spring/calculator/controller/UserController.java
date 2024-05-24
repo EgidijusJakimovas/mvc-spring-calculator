@@ -22,8 +22,6 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    private final UserService userService;
-
     @Autowired
     UserValidator userValidator;
 
@@ -31,9 +29,8 @@ public class UserController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserController(@Qualifier("UserService") UserService userService) {
-        this.userService = userService;
-    }
+    @Qualifier("UserService")
+    UserService userService;
 
     @GetMapping("/login")
     public String login(Model model) {
