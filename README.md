@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Spring MVC Calculator</title>
-</head>
 <body>
 <h1>Spring MVC Calculator</h1>
 
