@@ -13,5 +13,5 @@ public class ServletInitializer extends SpringBootServletInitializer {
 }
 
 // TODO:
-//      1. grizus i login galima grizt atgal i calculator
+//      1. prisiloginus su narsykles back migutuku galima grizt atgal i login ir vel i calculator ir taip vaikscioti(panaikinti)
 //      2. skaiciavimu paieska
