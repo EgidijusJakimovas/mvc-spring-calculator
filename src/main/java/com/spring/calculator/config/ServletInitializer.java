@@ -15,4 +15,3 @@ public class ServletInitializer extends SpringBootServletInitializer {
 // TODO:
 //      1. grizus i login galima grizt atgal i calculator
 //      2. skaiciavimu paieska
-//      3. back migtukas
