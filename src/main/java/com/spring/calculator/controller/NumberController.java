@@ -106,7 +106,7 @@ public class NumberController {
         Number number = numberService.getById(id);
         model.addAttribute("number", number);
 
-        return "number";
+        return "view";
     }
 
     @GetMapping("/delete{id}")
