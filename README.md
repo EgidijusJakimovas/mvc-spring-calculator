@@ -50,7 +50,7 @@
     <li>Administrators can manage calculations (view, update, delete) of all users.</li>
     <li>Administrators can view all registered users.</li>
 </ol>
-
+<p><strong style="color: red;">IMPORTANT: Default new registered user role is USER. If you want to change the role to ADMIN (for more experiences like CRUD operations on calculator records or to see registered users), you have to change the ENUM ROLE radio button in the database.</strong></p>
 
 <h2 id="technologies">Technologies Used:</h2>
 <ul>
